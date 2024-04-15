@@ -1,16 +1,16 @@
 #include <iostream>
 #include <list>
-
+#include <queue>
 using namespace std;
 
 struct TreeNode
 {
-private:
+//private:
     string medicareId;
     int directContacts = 0;
     int totalCases = 1;
     TreeNode *parent;
-    list<TreeNode *> children;
+    list<TreeNode*> children;
 
 public:
     TreeNode(const string &medId)
@@ -28,9 +28,12 @@ public:
 class ContactTrace
 {
 private:
+    int size = 0;
+    TreeNode* root;
 public:
     ContactTrace()
     {
+        this->root = nullptr;
     }
 
     ~ContactTrace()
@@ -39,24 +42,50 @@ public:
 
     bool IsEmpty()
     {
-        return true;
+        return true; //this->size == 0; //this->roo == nullptr;
     }
 
     int GetSize()
     {
-        return 0;
+        return 0; //this->size;
     }
 
-    void AddPatient0(const string &)
+    void AddPatient0(const string &id)
     {
+        root = new TreeNode(id); 
+        //parameterized constructor that accepts a contact Id 
+        //and creates the tree as well as its first node.
     }
 
     void AddContact(const string &, const string &)
     {
     }
 
-    TreeNode *LookUpContact(const string &)
+    TreeNode *LookUpContact(const string &searchId)
     {
+        queue<TreeNode*> p; //p storing the pointers to the TreeNode objects
+        if(this->root != nullptr)
+        {
+            p.push(root);  
+        }
+        while(!p.empty())
+        {
+            TreeNode *currentElem = p.front(); 
+            //currentElem = currentChild
+        
+            if(currentElem->medicareId == searchId)
+            {
+                return currentElem; 
+            }
+            else
+            {
+                 p.pop(); //front elem is dequeue/removed showing 
+            //that currentElem is != searchId
+            } 
+
+            for(TreeNode* child : currentElem->children)
+                p.push(child);
+        }
         return nullptr;
     }
 
@@ -91,5 +120,5 @@ public:
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "This is our contact tracer!\n";
 }
