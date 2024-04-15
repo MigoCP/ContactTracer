@@ -28,6 +28,8 @@ public:
 class ContactTrace
 {
 private:
+    int size = 0;
+    TreeNode* head;
 public:
     ContactTrace()
     {
@@ -91,5 +93,5 @@ public:
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "This is our contact tracer!\n";
 }
