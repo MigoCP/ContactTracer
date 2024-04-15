@@ -39,10 +39,12 @@ public:
 
     bool IsEmpty()
     {
+        return true;
     }
 
     int GetSize()
     {
+        return 0;
     }
 
     void AddPatient0(const string &)
@@ -55,6 +57,7 @@ public:
 
     TreeNode *LookUpContact(const string &)
     {
+        return nullptr;
     }
 
     void DeleteContact(const string &)
