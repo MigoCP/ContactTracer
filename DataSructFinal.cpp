@@ -1,11 +1,12 @@
 #include <iostream>
 #include <list>
 #include <queue>
+
 using namespace std;
 
 struct TreeNode
 {
-//private:
+//private: 
     string medicareId;
     int directContacts = 0;
     int totalCases = 1;
@@ -47,7 +48,7 @@ public:
 
     int GetSize()
     {
-        return 0; //this->size;
+        return this->size;
     }
 
     void AddPatient0(const string &id)
@@ -57,12 +58,28 @@ public:
         //and creates the tree as well as its first node.
     }
 
-    void AddContact(const string &, const string &)
+    void AddContact(const string &id1, const string &id2)
     {
+        TreeNode *node1 = LookUpContact(id1);
+        if(node1 != nullptr)
+        {
+            TreeNode *node2 = new TreeNode(node1, id2);
+            node2->children.push_back(node1);
+            node1->directContacts++;
+            //node1->totalCases++;
+            TreeNode *newParent = node1;
+            
+        }
     }
 
     TreeNode *LookUpContact(const string &searchId)
     {
+        //queue helps us focus on specific operations needed
+        //for BFS
+        //queue allows nodes to be enqueued at the back and
+        //dequeued from the front in constant time
+        //queue has a simple interface compared to  deque
+        // 
         queue<TreeNode*> p; //p storing the pointers to the TreeNode objects
         if(this->root != nullptr)
         {
@@ -79,11 +96,12 @@ public:
             }
             else
             {
-                 p.pop(); //front elem is dequeue/removed showing 
+                 p.pop(); 
+            //front elem is dequeue/removed showing 
             //that currentElem is != searchId
             } 
 
-            for(TreeNode* child : currentElem->children)
+            for(TreeNode *child : currentElem->children)
                 p.push(child);
         }
         return nullptr;
@@ -115,10 +133,13 @@ public:
 
     void PrintHierarchicalTree()
     {
+        //choose the order to use preorder,...?
+        //found in stack file - fibonacci
     }
 };
 
 int main()
 {
+    std::cout << "This is our contact tracer!\n";
     std::cout << "This is our contact tracer!\n";
 }
