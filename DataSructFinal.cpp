@@ -121,4 +121,5 @@ public:
 int main()
 {
     std::cout << "This is our contact tracer!\n";
+    std::cout << "This is our contact tracer!\n";
 }
