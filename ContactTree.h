@@ -43,7 +43,12 @@ public:
             node1->directContacts++;
             //node1->totalCases++;
             TreeNode *newParent = node1;
-            
+            while (newParent != nullptr) {
+                newParent->totalCases++;
+                newParent = newParent->parent;
+            }
+        } else {
+            std::cout << "Error: Parent node not found." << std::endl;
         }
     }
 
